@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import {
   Box,
+  Button as MuiButton,
   Container,
   TextField,
   Typography,
@@ -11,6 +12,7 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useTheme } from "@mui/material/styles";
 import SideBarComponent from "@/components/ui/SideBarComponent"; // Adjust the import path as necessary
 import { Input } from "@/components/ui/input";
@@ -171,39 +173,39 @@ export default function User({ params }) {
           <Label htmlFor="History" className="ml-2 text-lg font-bold">
             History
           </Label>
-          <div ref={containerRef} className="absolute">
-            {placeholder.entries
-              .slice()
-              .reverse()
-              .map((entry, index) => (
-                // <motion.div
-                //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
-                //   transition={{ duration: 0.5 }}
-        
-                // >
-                  <Card
-                    className={clsx(
-                      "mb-4 max-w-lg p-3 leading-5 hover:scale-[1.02]",
-                      sentimentClasses[entry.sentiment],
-                    )}
-                  >
-                    <CardContent className="flex flex-col">
-                      <div className="text-sm text-gray-500">{entry.date}</div>
-                      <div className="flex">
-                        <div className="mt-1.5 content-center">
-                          {entry.text}
-                        </div>
-                        <Button className="ml-auto mt-1.5 block h-min w-min pl-2 pr-2 leading-[1.1]">
-                          <span className="block">View</span>
-                          <span className="block">More</span>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                // </motion.div>
-              ))}
-          </div>
+          {placeholder.entries
+            .slice()
+            .reverse()
+            .map((entry, index) => (
+              // <motion.div
+              //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
+              //   transition={{ duration: 0.5 }}
+      
+              // >              
+              <Card
+                className={clsx(
+                  "mb-4 p-4 leading-5 hover:scale-[1.02]",
+                  sentimentClasses[entry.sentiment],
+                )}
+              >
+                <CardContent className="flex flex-col">
+                  <div className="text-sm text-gray-500">{entry.date}</div>
+                  <div className="flex">
+                  <div className="mt-1.5 content-center text-lg w-[90%] break-words">
+                    {entry.text}
+                    </div>
+                    <MuiButton
+                      variant="contained"
+                      className="ml-1.5 mt-1.5 block h-min w-min px-2 py-2 flex items-center justify-center text-md"
+                    >
+                      <span className="mr-0.5 text-sm ml-1">View More</span>
+                      <ChevronRightIcon fontSize="medium" />
+                    </MuiButton>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
         </div>
         <div
           style={{ height: `${Math.floor(height)}px` }}
