@@ -52,7 +52,7 @@ const SideBarComponent = () => {
         </Typography>
       )}
       <List>
-        <ListItem button onClick={() => handleNavigation("/")}>
+        <ListItem button={"true"} onClick={() => handleNavigation("/")}>
           <ListItemText
             primary="Home"
             primaryTypographyProps={{
@@ -61,7 +61,7 @@ const SideBarComponent = () => {
             }}
           />
         </ListItem>
-        <ListItem button onClick={() => handleNavigation("/about")}>
+        <ListItem button={"true"} onClick={() => handleNavigation("/about")}>
           <ListItemText
             primary="About"
             primaryTypographyProps={{
