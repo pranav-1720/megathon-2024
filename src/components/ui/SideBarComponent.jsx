@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 const SideBarComponent = () => {
   const router = useRouter();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = true
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const handleNavigation = (path) => {
