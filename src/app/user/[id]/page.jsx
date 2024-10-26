@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -25,24 +25,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import clsx from "clsx";
+import { motion } from 'framer-motion'
+
 
 export default function User({ params }) {
-  // const { id } = params;
-  // const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Detect mobile view
-  // const [inputValue, setInputValue] = useState("");
+  const containerRef = useRef(null);
+  const [height, setHeight] = useState(0);
 
-  // // Placeholder function for the send button
-  // const handleSubmit = () => {
-  //   console.log("Send button clicked with input:", inputValue);
-  // };
-
-  // // Mock JSON data to display as a list
-  // const mockData = [
-  //   { id: 1, text: "Admin item 1" },
-  //   { id: 2, text: "Admin item 2" },
-  //   { id: 3, text: "Admin item 3" },
-  // ];
+  useEffect(() => {
+    if (containerRef.current) {
+      setHeight(containerRef.current.getBoundingClientRect().height);
+    }
+  }, []);
 
   const sentimentClasses = {
     positive: "hover:bg-yellow-50",
@@ -173,35 +167,48 @@ export default function User({ params }) {
             <button className="ml-2 mt-1 h-0 w-0 border-b-[1em] border-l-[1em] border-t-[1em] border-b-transparent border-l-black border-t-transparent"></button>
           </div>
         </div>
-
         <div className="mt-6" id="History">
           <Label htmlFor="History" className="ml-2 text-lg font-bold">
             History
           </Label>
-          {placeholder.entries
-            .slice()
-            .reverse()
-            .map((entry) => (
-              <Card
-                className={clsx(
-                  "mb-4 max-w-lg p-3 leading-5 hover:scale-[1.02]",
-                  sentimentClasses[entry.sentiment],
-                )}
-              >
-                <CardContent className="flex flex-col">
-                  <div className="text-sm text-gray-500">{entry.date}</div>
-                  <div className="flex">
-                    <div className="mt-1.5 content-center">{entry.text}</div>
-                    <Button className="ml-auto mt-1.5 block h-min w-min pl-2 pr-2 leading-[1.1]">
-                      <span className="block">View</span>
-                      <span className="block">More</span>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div ref={containerRef} className="absolute">
+            {placeholder.entries
+              .slice()
+              .reverse()
+              .map((entry, index) => (
+                // <motion.div
+                //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
+                //   transition={{ duration: 0.5 }}
+        
+                // >
+                  <Card
+                    className={clsx(
+                      "mb-4 max-w-lg p-3 leading-5 hover:scale-[1.02]",
+                      sentimentClasses[entry.sentiment],
+                    )}
+                  >
+                    <CardContent className="flex flex-col">
+                      <div className="text-sm text-gray-500">{entry.date}</div>
+                      <div className="flex">
+                        <div className="mt-1.5 content-center">
+                          {entry.text}
+                        </div>
+                        <Button className="ml-auto mt-1.5 block h-min w-min pl-2 pr-2 leading-[1.1]">
+                          <span className="block">View</span>
+                          <span className="block">More</span>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                // </motion.div>
+              ))}
+          </div>
         </div>
-
+        <div
+          style={{ height: `${Math.floor(height)}px` }}
+          className="mt-4 w-12 bg-green-400"
+        ></div>{" "}
         <div className="mt-6 w-full">
           <div className="mx-auto h-32 w-3/5 rounded-xl border-8 border-brown-900 bg-brown-800"></div>
           <div className="mx-auto h-32 w-2/5 rounded-xl rounded-t-none border-8 border-t-0 border-brown-900 bg-brown-800"></div>
