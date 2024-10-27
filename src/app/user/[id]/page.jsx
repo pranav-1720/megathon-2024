@@ -259,7 +259,7 @@ export default function User({ params }) {
           <div
             ref={containerRef}
             className="max-w-md"
-            style={{ marginBottom: `${Math.floor(-height)}px` }}
+          // style={{ marginBottom: `${Math.floor(-height)}px` }}
           >
             {chats
               .slice()
@@ -303,15 +303,19 @@ export default function User({ params }) {
                 </Card>
               ))}
           </div>
+
         </div>
-        <div
-          style={{ height: `${Math.floor(height)}px` }}
-          className="mt-4 w-12 bg-green-400"
-        ></div>
+        {/* <div className="w-full">
+              <div className="mx-auto h-32 w-3/5 rounded-xl border-8 border-brown-900 bg-brown-800"></div>
+              <div className="mx-auto h-32 w-2/5 rounded-xl rounded-t-none border-8 border-t-0 border-brown-900 bg-brown-800"></div>
+            </div> */}
         <div className="w-full">
-          <div className="mx-auto h-32 w-3/5 rounded-xl border-8 border-brown-900 bg-brown-800"></div>
-          <div className="mx-auto h-32 w-2/5 rounded-xl rounded-t-none border-8 border-t-0 border-brown-900 bg-brown-800"></div>
+          <div className="mx-auto h-32 w-3/5 rounded-xl border-8 border-brown-900 bg-brown-800" />
+          <div className="mx-auto h-32 w-[59%] rounded-xl rounded-t-none border-8 border-brown-900 bg-brown-800"
+            style={{ clipPath: "polygon(0 0, 100% 0, 80% 100%, 20% 100%)", }}
+          />
         </div>
+
       </div>
     </Box>
   );
