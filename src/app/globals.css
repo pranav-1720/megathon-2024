@@ -85,3 +85,62 @@ body {
   opacity: 0;
   animation: fadeIn .5s ease-out forwards;
 }
+
+.wrap {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+.center {
+  width: 100px;
+  height: 100px;
+  border-radius: 999px;
+  background-color: rgba(219, 241, 52, 0.806);
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.petal {
+  width: 100px;
+  height: 100px;
+  border-radius: 999px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(20, 30, 255, 0.5);
+}
+.petal:nth-child(1) {
+  top: calc(50% - 71px - 50px);
+  left: calc(50% + 71px - 50px);
+}
+.petal:nth-child(2) {
+  top: calc(50% - 50px);
+  left: calc(50% + 100px - 50px);
+}
+.petal:nth-child(3) {
+  top: calc(50% + 71px - 50px);
+  left: calc(50% + 71px - 50px);
+}
+.petal:nth-child(4) {
+  top: calc(50% + 100px - 50px);
+  left: calc(50% - 50px);
+}
+.petal:nth-child(5) {
+  top: calc(50% + 71px - 50px);
+  left: calc(50% - 71px - 50px);
+}
+.petal:nth-child(6) {
+  top: calc(50% - 50px);
+  left: calc(50% - 100px - 50px);
+}
+.petal:nth-child(7) {
+  top: calc(50% - 71px - 50px);
+  left: calc(50% - 71px - 50px);
+}
+.petal:nth-child(8) {
+  top: calc(50% - 100px - 50px);
+  left: calc(50% - 50px);
+}

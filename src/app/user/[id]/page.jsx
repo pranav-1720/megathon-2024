@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, use } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
   Box,
   Button as MuiButton,
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import clsx from "clsx";
-import AnimatedText from "@/components/ui/AnimatedText"; 
+import AnimatedText from "@/components/ui/AnimatedText";
 // import { motion } from "framer-motion";
 
 // const sentiments = ["positive", "negative", "neutral"];
@@ -169,7 +169,7 @@ export default function User({ params }) {
     fetch(backendUrl + "chat/llama", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -314,6 +314,20 @@ export default function User({ params }) {
               History
             </Label>
           </center>
+          {chats?.length === 0 ? null : (
+            <div class="wrap">
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="petal"></div>
+              <div class="center"></div>
+            </div>
+          )}
+
           <div
             ref={containerRef}
             className="max-w-md"
@@ -373,7 +387,7 @@ export default function User({ params }) {
           className="mt-4 w-12 bg-green-400"
         ></div>
         <div className="w-full">
-          <div className="mx-auto h-32 w-3/5 rounded-xl border-8 border-brown-900 bg-brown-800" />
+          <div className="mx-auto h-32 w-1/2 rounded-xl border-8 border-brown-900 bg-brown-800" />
           <div className="mx-auto h-32 w-2/5 rounded-xl rounded-t-none border-8 border-t-0 border-brown-900 bg-brown-800" />
         </div>
       </div>
