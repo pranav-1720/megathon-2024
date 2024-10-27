@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import clsx from "clsx";
+import AnimatedText from "@/components/ui/AnimatedText"; 
 // import { motion } from "framer-motion";
 
 // const sentiments = ["positive", "negative", "neutral"];
@@ -180,8 +181,12 @@ export default function User({ params }) {
         return response.json();
       })
       .then((data) => {
-        console.log(chats);
-        setChats([...chats, data]);
+        setCurrentChat("");
+        if (!chats || chats.length === 0) {
+          setChats([data]);
+        } else {
+          setChats([...chats, data]);
+        }
       });
   };
 
@@ -226,7 +231,37 @@ export default function User({ params }) {
               </Typography>
             ) : (
               <>
-                <Typography variant="body1" color="text.secondary" gutterBottom>
+                <AnimatedText chats={chats} inputValue={inputValue} />
+                {/* <p className="text-2xl  text-gray-400 pop-up">
+                  <span className="text-gray-400">On {chats?.find((chat) => chat.id === inputValue)?.date}, you
+                  remarked that{" "}</span> 
+                  <span className="italic"> &quot;{chats?.find((chat) => chat.id === inputValue)?.chat}&quot;</span>
+                  {". "}
+                  This indicates symptoms of{" "}
+                  <span className="italic text-black">
+                  {chats?.find((chat) => chat.id === inputValue)?.data.category}{" "}
+                  </span>
+                  with intensity of{" "}
+                  <span className="italic text-black">
+                  {
+                    chats?.find((chat) => chat.id === inputValue)?.data
+                      .intensity
+                  }{" "}
+                  </span>
+                  and is{" "}
+                  <span className={clsx(
+                    "italic text-black",
+                    chats?.find((chat) => chat.id === inputValue)?.data.type === "positive"
+                      ? "text-green-500"
+                      : chats?.find((chat) => chat.id === inputValue)?.data.type === "negative"
+                      ? "text-red-500"
+                      : ""
+                  )}>
+                  {chats?.find((chat) => chat.id === inputValue)?.data.type}{" "}
+                  </span> 
+                  for you.
+                </p> */}
+                {/* <Typography variant="body1" color="text.secondary" gutterBottom>
                   {chats?.find((chat) => chat.id === inputValue)?.date}
                 </Typography>
                 <Typography variant="h4" gutterBottom>
@@ -246,7 +281,7 @@ export default function User({ params }) {
                     chats?.find((chat) => chat.id === inputValue)?.data
                       .intensity
                   }
-                </Typography>
+                </Typography> */}
               </>
             )}
           </Container>
@@ -263,6 +298,7 @@ export default function User({ params }) {
               <Input
                 id="message"
                 placeholder="I am feeling..."
+                value={currentChat}
                 onChange={(e) => setCurrentChat(e.target.value)}
               />
               <button
@@ -288,48 +324,50 @@ export default function User({ params }) {
                 No chat history found.
               </Typography>
             ) : (
-              chats?.reverse().map((entry, index) => (
-                // <motion.div
-                //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
-                //   transition={{ duration: 0.5 }}
+              chats
+                ?.slice()
+                .reverse()
+                .map((entry, index) => (
+                  // <motion.div
+                  //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
+                  //   transition={{ duration: 0.5 }}
 
-                // >
-                <Card
-                  key={index} // Add a unique key prop
-                  className={clsx(
-                    "relative mb-12 p-4 leading-5 hover:scale-[1.02]",
-                    sentimentClasses[entry.sentiment],
-                    index % 2 === 0 ? "-left-1/4" : "-right-1/4",
-                  )}
-                >
-                  <CardContent className="flex flex-col">
-                    <div className="text-sm text-gray-500">{entry.date}</div>
-                    <div className="flex">
-                      <div className="mt-1.5 w-[90%] content-center break-words text-lg">
-                        {entry.chat}
+                  // >
+                  <Card
+                    key={index} // Add a unique key prop
+                    className={clsx(
+                      "relative mb-12 p-4 leading-5 hover:scale-[1.02]",
+                      sentimentClasses[entry.sentiment],
+                      index % 2 === 0 ? "-left-1/4" : "-right-1/4",
+                    )}
+                  >
+                    <CardContent className="flex flex-col">
+                      <div className="text-sm text-gray-500">{entry.date}</div>
+                      <div className="flex">
+                        <div className="mt-1.5 w-[90%] content-center break-words text-lg">
+                          {entry.chat}
+                        </div>
+                        <MuiButton
+                          variant="contained"
+                          className={clsx(
+                            "text-md ml-1.5 mt-1.5 flex h-min w-min items-center justify-center px-2 py-2",
+                          )}
+                          onClick={() => {
+                            setIsModalOpen(true);
+                            setInputValue(entry.id);
+                          }}
+                        >
+                          <span className="ml-2 mr-0.5 text-sm">View More</span>
+                          <ChevronRightIcon fontSize="medium" />
+                        </MuiButton>
                       </div>
-                      <MuiButton
-                        variant="contained"
-                        className={clsx(
-                          "text-md ml-1.5 mt-1.5 flex h-min w-min items-center justify-center px-2 py-2",
-                        )}
-                        onClick={() => {
-                          setIsModalOpen(true);
-                          setInputValue(entry.id);
-                        }}
-                      >
-                        <span className="ml-2 mr-0.5 text-sm">View More</span>
-                        <ChevronRightIcon fontSize="medium" />
-                      </MuiButton>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
+                    </CardContent>
+                  </Card>
+                ))
             )}
           </div>
         </div>
-        <p>height is {`${Math.floor(height)}px`} </p>
         <div
           style={{ height: `${Math.floor(height)}px` }}
           className="mt-4 w-12 bg-green-400"
