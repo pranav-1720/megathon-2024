@@ -15,6 +15,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/navigation";
 
 const SideBarComponent = () => {
@@ -80,10 +81,11 @@ const SideBarComponent = () => {
         <AppBar position="static" sx={{ backgroundColor: "#3859ee" }}>
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Pandavas
+              Pandavas
             </Typography>
             <Button color="inherit" onClick={() => setDrawerOpen(true)}>
-              Menu
+              Menu {" "} <MenuIcon sx={{ ml: 1 }}
+              />
             </Button>
           </Toolbar>
           <Drawer
