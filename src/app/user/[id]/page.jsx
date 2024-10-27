@@ -30,111 +30,111 @@ import {
 import clsx from "clsx";
 import { motion } from 'framer-motion';
 
-const sentiments = ["positive", "negative", "neutral"];
-const placeholder = {
-  entries: [
-    {
-      date: "2023-10-01",
-      text: "I can't seem to shake off this feeling of unease.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-02",
-      text: "It feels like there's a cloud of worry hanging over me.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-03",
-      text: "I keep replaying worst-case scenarios in my mind.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-04",
-      text: "Sleep has become elusive because of this constant worry.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-05",
-      text: "My mind feels like a pressure cooker, always on the edge.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-06",
-      text: "It's hard to focus on anything when anxiety keeps creeping in.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-07",
-      text: "I feel a knot in my stomach that refuses to go away.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-08",
-      text: "Sometimes I feel like I'm drowning in a sea of anxious thoughts.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-09",
-      text: "My heart races even at the smallest triggers.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-10",
-      text: "The uncertainty of the future is overwhelming me.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-11",
-      text: "I often find myself overthinking even the simplest decisions.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-12",
-      text: "It feels like there's a tight grip around my chest, making it hard to breathe.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-13",
-      text: "The fear of something going wrong is always lurking in the back of my mind.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-14",
-      text: "It's frustrating how easily my mind jumps to the worst-case scenario.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-15",
-      text: "Anxiety has turned even the smallest tasks into daunting challenges.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-16",
-      text: "It's exhausting to constantly battle with my own mind.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-17",
-      text: "I feel like I'm walking on eggshells, afraid of triggering my anxiety.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-18",
-      text: "My mind is constantly racing, making it hard to find peace.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-19",
-      text: "The feeling of impending doom hangs heavy on my shoulders.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-    {
-      date: "2023-10-20",
-      text: "It's hard to explain to others how anxiety can take over your life.",
-      sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
-    },
-  ],
-};
+  const sentiments = ["positive", "negative", "neutral"];
+  const placeholder = {
+    entries: [
+      {
+        date: "2023-10-01",
+        text: "I can't seem to shake off this feeling of unease.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-02",
+        text: "It feels like there's a cloud of worry hanging over me.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-03",
+        text: "I keep replaying worst-case scenarios in my mind.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-04",
+        text: "Sleep has become elusive because of this constant worry.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-05",
+        text: "My mind feels like a pressure cooker, always on the edge.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-06",
+        text: "It's hard to focus on anything when anxiety keeps creeping in.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-07",
+        text: "I feel a knot in my stomach that refuses to go away.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-08",
+        text: "Sometimes I feel like I'm drowning in a sea of anxious thoughts.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-09",
+        text: "My heart races even at the smallest triggers.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-10",
+        text: "The uncertainty of the future is overwhelming me.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-11",
+        text: "I often find myself overthinking even the simplest decisions.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-12",
+        text: "It feels like there's a tight grip around my chest, making it hard to breathe.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-13",
+        text: "The fear of something going wrong is always lurking in the back of my mind.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-14",
+        text: "It's frustrating how easily my mind jumps to the worst-case scenario.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-15",
+        text: "Anxiety has turned even the smallest tasks into daunting challenges.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-16",
+        text: "It's exhausting to constantly battle with my own mind.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-17",
+        text: "I feel like I'm walking on eggshells, afraid of triggering my anxiety.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-18",
+        text: "My mind is constantly racing, making it hard to find peace.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-19",
+        text: "The feeling of impending doom hangs heavy on my shoulders.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+      {
+        date: "2023-10-20",
+        text: "It's hard to explain to others how anxiety can take over your life.",
+        sentiment: sentiments[Math.floor(Math.random() * sentiments.length)],
+      },
+    ],
+  };
 
 
 export default function User({ params }) {
@@ -215,46 +215,52 @@ export default function User({ params }) {
         <div className="mt-6" id="History">
           <center>
             <Label htmlFor="History" className="ml-2 text-3xl font-bold">
-              History
-            </Label>
+            History
+          </Label>
           </center>
-          {placeholder.entries
-            .slice()
-            .reverse()
-            .map((entry, index) => (
-              // <motion.div
-              //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
-              //   transition={{ duration: 0.5 }}
+          <div
+            ref={containerRef}
+            className="max-w-md"
+            style={{ "margin-bottom": `${Math.floor(-height)}px` }}
+          >
+            {placeholder.entries
+              .slice()
+              .reverse()
+              .map((entry, index) => (
+                // <motion.div
+                //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
+                //   transition={{ duration: 0.5 }}
 
-              // >              
-              <Card
-                className={clsx(
-                  "mb-4 p-4 leading-5 hover:scale-[1.02]",
-                  sentimentClasses[entry.sentiment],
-                )}
-              >
-                <CardContent className="flex flex-col">
-                  <div className="text-sm text-gray-500">{entry.date}</div>
-                  <div className="flex">
-                    <div className="mt-1.5 content-center text-lg w-[90%] break-words">
-                      {entry.text}
+                // >
+                <Card
+                  className={clsx(
+                    "relative mb-12 p-4 leading-5 hover:scale-[1.02]",
+                    sentimentClasses[entry.sentiment],
+                    index % 2 === 0 ? "-left-1/4" : "-right-1/4",
+                  )}
+                >
+                  <CardContent className="flex flex-col">
+                    <div className="text-sm text-gray-500">{entry.date}</div>
+                    <div className="flex">
+                      <div className="mt-1.5 w-[90%] content-center break-words text-lg">
+                        {entry.text}
+                      </div>
+                      <MuiButton
+                        variant="contained"
+                        className="text-md ml-1.5 mt-1.5 flex h-min w-min items-center justify-center px-2 py-2"
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          setInputValue(index);
+                        }}                      >
+                        <span className="ml-1 mr-0.5 text-sm">View More</span>
+                        <ChevronRightIcon fontSize="medium" />
+                      </MuiButton>
                     </div>
-                    <MuiButton
-                      variant="contained"
-                      className="ml-1.5 mt-1.5 block h-min w-min px-2 py-2 flex items-center justify-center text-md"
-                      onClick={() => {
-                        setIsModalOpen(true);
-                        setInputValue(index);
-                      }}
-                    >
-                      <span className="mr-0.5 text-sm ml-1">View More</span>
-                      <ChevronRightIcon fontSize="medium" />
-                    </MuiButton>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
         </div>
         <div
           style={{ height: `${Math.floor(height)}px` }}
