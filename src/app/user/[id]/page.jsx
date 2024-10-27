@@ -136,7 +136,7 @@ export default function User({ params }) {
     if (containerRef.current) {
       setHeight(containerRef.current.getBoundingClientRect().height);
     }
-  }, []);
+  }, [chats]);
 
   useEffect(() => {
     fetch(backendUrl + "chats/" + id, {
@@ -165,7 +165,7 @@ export default function User({ params }) {
   const handleOnSubmit = () => {
     event.preventDefault();
     console.log(id);
-    fetch(backendUrl + "chat", {
+    fetch(backendUrl + "chat/llama", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -176,8 +176,11 @@ export default function User({ params }) {
         chat: currentChat,
       }),
     })
-      .then((response) => { return response.json() })
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
+        console.log(chats);
         setChats([...chats, data]);
       });
   };
@@ -215,27 +218,37 @@ export default function User({ params }) {
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
           >
             {/* { Check if the chat.id is available */}
-            {
-              chats && chats.length && chats.find(chat => chat.id === inputValue) === undefined ?
-                <Typography variant="body1" color="text.secondary" gutterBottom>
-                  No chat history found.
-                </Typography> :
-                <>
+            {chats &&
+            chats.length &&
+            chats.find((chat) => chat.id === inputValue) === undefined ? (
               <Typography variant="body1" color="text.secondary" gutterBottom>
-              {chats.find(chat => chat.id === inputValue)?.date}
-            </Typography>
-            <Typography variant="h4" gutterBottom>
-              {chats.find(chat => chat.id === inputValue)?.chat}
-            </Typography>
-            <Typography variant="h6" gutterBottom>
-              Category: {chats.find(chat => chat.id === inputValue)?.data.category}
-            </Typography>
-            <Typography variant="h6" gutterBottom>
-              Type: {chats.find(chat => chat.id === inputValue)?.data.type}
-            </Typography>
-            <Typography variant="h6" gutterBottom>
-              Intensity: {chats.find(chat => chat.id === inputValue)?.data.intensity}
-            </Typography></>}
+                No chat history found.
+              </Typography>
+            ) : (
+              <>
+                <Typography variant="body1" color="text.secondary" gutterBottom>
+                  {chats?.find((chat) => chat.id === inputValue)?.date}
+                </Typography>
+                <Typography variant="h4" gutterBottom>
+                  {chats?.find((chat) => chat.id === inputValue)?.chat}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  Category:{" "}
+                  {chats?.find((chat) => chat.id === inputValue)?.data.category}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  Type:{" "}
+                  {chats?.find((chat) => chat.id === inputValue)?.data.type}
+                </Typography>
+                <Typography variant="h6" gutterBottom>
+                  Intensity:{" "}
+                  {
+                    chats?.find((chat) => chat.id === inputValue)?.data
+                      .intensity
+                  }
+                </Typography>
+              </>
+            )}
           </Container>
         </Box>
       </Modal>
@@ -268,15 +281,14 @@ export default function User({ params }) {
           <div
             ref={containerRef}
             className="max-w-md"
-          // style={{ marginBottom: `${Math.floor(-height)}px` }}
+            style={{ marginBottom: `${Math.floor(-height)}px` }}
           >
-            {chats.length === 0 ? (
+            {chats?.length === 0 ? (
               <Typography variant="body1" color="text.secondary" gutterBottom>
                 No chat history found.
               </Typography>
-            ) : chats
-              .reverse()
-              .map((entry, index) => (
+            ) : (
+              chats?.reverse().map((entry, index) => (
                 // <motion.div
                 //   initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                 //   animate={{ opacity: 1, x: index % 2 === 0 ? -50 : 10 }}
@@ -313,21 +325,19 @@ export default function User({ params }) {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
+              ))
+            )}
           </div>
-
         </div>
-        {/* <div className="w-full">
-              <div className="mx-auto h-32 w-3/5 rounded-xl border-8 border-brown-900 bg-brown-800"></div>
-              <div className="mx-auto h-32 w-2/5 rounded-xl rounded-t-none border-8 border-t-0 border-brown-900 bg-brown-800"></div>
-            </div> */}
+        <p>height is {`${Math.floor(height)}px`} </p>
+        <div
+          style={{ height: `${Math.floor(height)}px` }}
+          className="mt-4 w-12 bg-green-400"
+        ></div>
         <div className="w-full">
           <div className="mx-auto h-32 w-3/5 rounded-xl border-8 border-brown-900 bg-brown-800" />
-          <div className="mx-auto h-32 w-[59%] rounded-xl rounded-t-none border-8 border-brown-900 bg-brown-800"
-            style={{ clipPath: "polygon(0 0, 100% 0, 80% 100%, 20% 100%)", }}
-          />
+          <div className="mx-auto h-32 w-2/5 rounded-xl rounded-t-none border-8 border-t-0 border-brown-900 bg-brown-800" />
         </div>
-
       </div>
     </Box>
   );
