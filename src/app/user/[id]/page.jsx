@@ -139,19 +139,18 @@ export default function User({ params }) {
   }, []);
 
   useEffect(() => {
-    fetch("http://10.2.143.209/chats/string", {
-      // mode: "no-cors",
+    fetch(backendUrl + "chats/" + id, {
+      mode: "cors",
       method: "GET",
       headers: {
         Accept: "application/json",
+        "Content-Type": "application/json",
       },
     })
       .then((response) => {
-        console.log(response);
-        response.json();
+        return response.json();
       })
       .then((data) => {
-        console.log(data);
         setChats(data.chats);
       })
       .catch((error) => console.error("Error:", error));
@@ -164,9 +163,9 @@ export default function User({ params }) {
   };
 
   const handleOnSubmit = () => {
+    event.preventDefault();
     console.log(id);
     fetch(backendUrl + "chat", {
-      mode: "no-cors",
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -177,7 +176,7 @@ export default function User({ params }) {
         chat: currentChat,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => { return response.json() })
       .then((data) => {
         setChats([...chats, data]);
       });
@@ -214,49 +213,52 @@ export default function User({ params }) {
               textAlign: "center",
             }}
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
-          >
+            >
             <Typography variant="body1" color="text.secondary" gutterBottom>
-              {chats[inputValue]?.date}
+              {chats.find(chat => chat.id === inputValue)?.date}
             </Typography>
             <Typography variant="h4" gutterBottom>
-              {chats[inputValue]?.chat}
+              {chats.find(chat => chat.id === inputValue)?.chat}
             </Typography>
             <Typography variant="h6" gutterBottom>
-              Property 1: {chats[inputValue]?.data.category}
+              Category: {chats.find(chat => chat.id === inputValue)?.data.category}
             </Typography>
             <Typography variant="h6" gutterBottom>
-              Property 2: {chats[inputValue]?.data.type}
+              Type: {chats.find(chat => chat.id === inputValue)?.data.type}
             </Typography>
-          </Container>
-        </Box>
-      </Modal>
+            <Typography variant="h6" gutterBottom>
+              Intensity: {chats.find(chat => chat.id === inputValue)?.data.intensity}
+            </Typography>
+            </Container>
+          </Box>
+          </Modal>
 
-      <div className="m-3 flex flex-col items-center justify-center leading-10">
-        <div className="w-full max-w-lg gap-1.5">
-          <form onSubmit={handleOnSubmit}>
+          <div className="m-3 flex flex-col items-center justify-center leading-10">
+          <div className="w-full max-w-lg gap-1.5">
+            <form onSubmit={handleOnSubmit}>
             <Label htmlFor="message" className="mb-2 ml-2 text-lg font-bold">
               Todays Thoughts
             </Label>
             <div className="flex flex-row">
               <Input
-                id="message"
-                placeholder="I am feeling..."
-                onChange={(e) => setCurrentChat(e.target.value)}
+              id="message"
+              placeholder="I am feeling..."
+              onChange={(e) => setCurrentChat(e.target.value)}
               />
               <button
-                className="ml-2 mt-1 h-0 w-0 border-b-[1em] border-l-[1em] border-t-[1em] border-b-transparent border-l-black border-t-transparent"
-                type="submit"
+              className="ml-2 mt-1 h-0 w-0 border-b-[1em] border-l-[1em] border-t-[1em] border-b-transparent border-l-black border-t-transparent"
+              type="submit"
               ></button>
             </div>
-          </form>
-        </div>
-        <div className="mt-6" id="History">
-          <center>
+            </form>
+          </div>
+          <div className="mt-6" id="History">
+            <center>
             <Label htmlFor="History" className="ml-2 text-3xl font-bold">
               History
             </Label>
-          </center>
-          <div
+            </center>
+            <div
             ref={containerRef}
             className="max-w-md"
           // style={{ marginBottom: `${Math.floor(-height)}px` }}
@@ -272,7 +274,7 @@ export default function User({ params }) {
 
                 // >
                 <Card
-                  key={entry.date} // Add a unique key prop
+                  key={index} // Add a unique key prop
                   className={clsx(
                     "relative mb-12 p-4 leading-5 hover:scale-[1.02]",
                     sentimentClasses[entry.sentiment],
@@ -283,7 +285,7 @@ export default function User({ params }) {
                     <div className="text-sm text-gray-500">{entry.date}</div>
                     <div className="flex">
                       <div className="mt-1.5 w-[90%] content-center break-words text-lg">
-                        {entry.text}
+                        {entry.chat}
                       </div>
                       <MuiButton
                         variant="contained"
@@ -292,10 +294,10 @@ export default function User({ params }) {
                         )}
                         onClick={() => {
                           setIsModalOpen(true);
-                          setInputValue(index);
+                          setInputValue(entry.id);
                         }}
                       >
-                        <span className="ml-1 mr-0.5 text-sm">View More</span>
+                        <span className="ml-2 mr-0.5 text-sm">View More</span>
                         <ChevronRightIcon fontSize="medium" />
                       </MuiButton>
                     </div>
