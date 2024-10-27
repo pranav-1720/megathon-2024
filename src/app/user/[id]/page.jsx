@@ -213,8 +213,15 @@ export default function User({ params }) {
               textAlign: "center",
             }}
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
-            >
-            <Typography variant="body1" color="text.secondary" gutterBottom>
+          >
+            {/* { Check if the chat.id is available */}
+            {
+              chats && chats.length && chats.find(chat => chat.id === inputValue) === undefined ?
+                <Typography variant="body1" color="text.secondary" gutterBottom>
+                  No chat history found.
+                </Typography> :
+                <>
+              <Typography variant="body1" color="text.secondary" gutterBottom>
               {chats.find(chat => chat.id === inputValue)?.date}
             </Typography>
             <Typography variant="h4" gutterBottom>
@@ -228,43 +235,46 @@ export default function User({ params }) {
             </Typography>
             <Typography variant="h6" gutterBottom>
               Intensity: {chats.find(chat => chat.id === inputValue)?.data.intensity}
-            </Typography>
-            </Container>
-          </Box>
-          </Modal>
+            </Typography></>}
+          </Container>
+        </Box>
+      </Modal>
 
-          <div className="m-3 flex flex-col items-center justify-center leading-10">
-          <div className="w-full max-w-lg gap-1.5">
-            <form onSubmit={handleOnSubmit}>
+      <div className="m-3 flex flex-col items-center justify-center leading-10">
+        <div className="w-full max-w-lg gap-1.5">
+          <form onSubmit={handleOnSubmit}>
             <Label htmlFor="message" className="mb-2 ml-2 text-lg font-bold">
               Todays Thoughts
             </Label>
             <div className="flex flex-row">
               <Input
-              id="message"
-              placeholder="I am feeling..."
-              onChange={(e) => setCurrentChat(e.target.value)}
+                id="message"
+                placeholder="I am feeling..."
+                onChange={(e) => setCurrentChat(e.target.value)}
               />
               <button
-              className="ml-2 mt-1 h-0 w-0 border-b-[1em] border-l-[1em] border-t-[1em] border-b-transparent border-l-black border-t-transparent"
-              type="submit"
+                className="ml-2 mt-1 h-0 w-0 border-b-[1em] border-l-[1em] border-t-[1em] border-b-transparent border-l-black border-t-transparent"
+                type="submit"
               ></button>
             </div>
-            </form>
-          </div>
-          <div className="mt-6" id="History">
-            <center>
+          </form>
+        </div>
+        <div className="mt-6" id="History">
+          <center>
             <Label htmlFor="History" className="ml-2 text-3xl font-bold">
               History
             </Label>
-            </center>
-            <div
+          </center>
+          <div
             ref={containerRef}
             className="max-w-md"
           // style={{ marginBottom: `${Math.floor(-height)}px` }}
           >
-            {chats
-              .slice()
+            {chats.length === 0 ? (
+              <Typography variant="body1" color="text.secondary" gutterBottom>
+                No chat history found.
+              </Typography>
+            ) : chats
               .reverse()
               .map((entry, index) => (
                 // <motion.div
